@@ -1,40 +1,31 @@
 import React, { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
+import QuoteMachine from "./quote_machine";
 import './index.css'
 
-const quoteUrl = 'https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json';
+/* async function NewQuote() {
+    const quoteUrl = 'https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json';
+    
+    // Uses fetch api to grab quotes object from json db... I think
+    const fetchRes = await fetch(quoteUrl).then(res => res.json())
+    const quotes = fetchRes.quotes;
+
+    // Picks a random quote from the quotes object and formats it
+    const randomIndex = Math.floor(Math.random() * Object.keys(quotes).length);
+    const q = [quotes[randomIndex].author, quotes[randomIndex].quote];
+  
+    return q;
+} */
 
 function Test(){
-    console.log(RenderQuote());
     return (
-        <h1>Test</h1>
+        <>
+            <QuoteMachine />
+        </>
     );
-}
-
-async function FetchTest() {
-    try {
-        let response = await fetch(quoteUrl)
-        .then(res => res.json());
-        return response.quotes;
-    } catch(error) {
-        console.log(error);
-    }
-}
-
-async function RenderQuote() {
-    const quotes = await FetchTest();
-    let q = '';
-    quotes.forEach(quote => {
-        let infoSegment = "Quote: " + quote.quote + " Author: " + quote.author + " || ";
-        q += infoSegment;
-    });
-
-    return q;
 }
 
 const root = ReactDOM.createRoot(document.getElementById(('root')));
 root.render(
-    <StrictMode>
-        <Test />
-    </StrictMode>,
+    <Test />,
 );
